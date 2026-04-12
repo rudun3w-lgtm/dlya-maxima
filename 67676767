@@ -767,8 +767,7 @@ local function autoSave()
 end
 
 local toggleRefs={}
-local settingsSliderRefs={}
-local Gui=Instance.new("ScreenGui")
+local settingsSliderRefs={}local Gui=Instance.new("ScreenGui")
 Gui.Name="RiflisHub_MM2"; Gui.ResetOnSpawn=false; Gui.IgnoreGuiInset=true
 pcall(function() Gui.Parent=game:GetService("CoreGui") end)
 if not Gui.Parent then Gui.Parent=LocalPlayer.PlayerGui end
@@ -1275,8 +1274,7 @@ local function showStyle(style)
 		else ClassicGui.Visible=false; ModernGui.Visible=true end
 		autoSave()
 	end)
-end
-local function createToggle(parent,yPos,text,default,key,callback)
+endlocal function createToggle(parent,yPos,text,default,key,callback)
 	local tf=Instance.new("Frame",parent)
 	tf.Size=UDim2.new(1,-20,0,38); tf.Position=UDim2.new(0,10,0,yPos)
 	tf.BackgroundColor3=adjustColor(bgColor,1.6); tf.BorderSizePixel=0; tf.ZIndex=4
@@ -1794,8 +1792,7 @@ local function buildModernTabs()
 	createToggle(mc3,y3,L("aimInnocent"),Settings.aimInnocentEnabled,nil,function(v) Settings.aimInnocentEnabled=v end); y3=y3+45
 	createToggle(mc3,y3,L("aimAll"),Settings.aimAllEnabled,nil,function(v) Settings.aimAllEnabled=v end)
 end
-buildModernTabs()
-updateColors=function()
+buildModernTabs()updateColors=function()
 	pcall(function()
 		for _,d in pairs(accentElements) do pcall(function() d[1][d[2]]=accentColor end) end
 		for _,d in pairs(bgElements) do pcall(function() d[1][d[2]]=adjustColor(bgColor,d[3] or 1) end) end
