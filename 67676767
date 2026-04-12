@@ -242,7 +242,9 @@ local function fling()
         end
         if bav and bav.Parent then bav:Destroy() end
     end)
-endlocal function SkidFling(TargetPlayer, duration)
+end
+
+local function SkidFling(TargetPlayer, duration)
     if not TargetPlayer or not TargetPlayer.Character then return end
     skidFlingActive = true
 
@@ -627,7 +629,9 @@ workspace.DescendantAdded:Connect(function(obj)
     if obj.Name~="GunDrop" or not obj:IsA("BasePart") then return end
     task.wait(0.1); if obj and obj.Parent and not belongsToAnyPlayer(obj) then createGunESP(obj) end
 end)
-workspace.DescendantRemoving:Connect(function(obj) if gunEspObjects[obj] then removeGunESP(obj) end end)-- ====== LANGUAGES ======
+workspace.DescendantRemoving:Connect(function(obj) if gunEspObjects[obj] then removeGunESP(obj) end end)
+
+-- ====== LANGUAGES ======
 local LANGS = {
     EN = {
         title="Script By: Riflis Hub | V1",langBtn="Language: EN [P]",
@@ -988,7 +992,9 @@ end
 
 for _,p in pairs(Players:GetPlayers()) do createESP(p) end
 Players.PlayerAdded:Connect(function(p) createESP(p); monitorBackpack(p); p.CharacterAdded:Connect(function() deadPlayers[p]=nil; roleCache[p]=nil end) end)
-Players.PlayerRemoving:Connect(function(p) removeESP(p); deadPlayers[p]=nil; roleCache[p]=nil end)-- ====== NOTIFICATION ======
+Players.PlayerRemoving:Connect(function(p) removeESP(p); deadPlayers[p]=nil; roleCache[p]=nil end)
+
+-- ====== NOTIFICATION ======
 local NF=Instance.new("Frame",Gui); NF.Size=UDim2.new(0,340,0,55); NF.Position=UDim2.new(1,360,1,-75)
 NF.BackgroundColor3=adjustColor(accentColor,0.9); NF.BorderSizePixel=0; NF.ZIndex=50
 Instance.new("UICorner",NF).CornerRadius=UDim.new(0,12)
@@ -1425,7 +1431,9 @@ local function createResetButton(parent,yPos,labelKey)
     btn.MouseLeave:Connect(function() TweenService:Create(frame,tweenFast,{BackgroundColor3=adjustColor(bgColor,1.3)}):Play() end)
     local ref={frame=frame,label=lbl,btn=btn,updateLang=function() lbl.Text=L(labelKey) end}
     resetBtnRefs[labelKey]=ref; return ref
-end-- ====== TAB 1 — VISUALS ======
+end
+
+-- ====== TAB 1 — VISUALS ======
 createToggle(tab1Content,5,L("esp"),Settings.espEnabled,"esp",function(v)
     Settings.espEnabled=v
     if not v then for _,d in pairs(espObjects) do d.highlight.Parent=nil end end
@@ -1910,7 +1918,9 @@ local function buildFlingTab()
     Players.PlayerAdded:Connect(function() task.wait(0.5); buildPlayerList() end)
     Players.PlayerRemoving:Connect(function() task.wait(0.1); buildPlayerList() end)
 end
-buildFlingTab()-- ====== TAB 3 — AIM ======
+buildFlingTab()
+
+-- ====== TAB 3 — AIM ======
 local function createHeader(par,yP,txt,col)
     local h=Instance.new("Frame",par)
     h.Size=UDim2.new(1,-20,0,30); h.Position=UDim2.new(0,10,0,yP)
@@ -2247,7 +2257,9 @@ MnB.BackgroundColor3=accentColor; MnB.BackgroundTransparency=0.3; MnB.BorderSize
 MnB.Text="⚡"; MnB.TextColor3=Color3.fromRGB(255,255,255); MnB.TextSize=22
 MnB.Font=Enum.Font.GothamBold; MnB.AutoButtonColor=false; MnB.Visible=false; MnB.ZIndex=30
 Instance.new("UICorner",MnB).CornerRadius=UDim.new(0,12)
-local mbS=Instance.new("UIStroke",MnB); mbS.Color=adjustColor(accentColor,1.3); mbS.Thickness=2-- ====== UPDATE COLORS ======
+local mbS=Instance.new("UIStroke",MnB); mbS.Color=adjustColor(accentColor,1.3); mbS.Thickness=2
+
+-- ====== UPDATE COLORS ======
 updateColors=function()
     for _,d in pairs(accentElements) do
         pcall(function() d[1][d[2]]=accentColor end)
@@ -2631,7 +2643,9 @@ RunService.Heartbeat:Connect(function(dt)
     if Settings.fovValue~=70 then
         Camera.FieldOfView=Settings.fovValue
     end
-end)-- ====== AUTOSAVE LOAD ======
+end)
+
+-- ====== AUTOSAVE LOAD ======
 updateColors()
 
 task.defer(function()
